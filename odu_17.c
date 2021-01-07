@@ -5,6 +5,9 @@ double lb =0;
 double rb = 1;
 double y_0 =1;
 double *x;
+/*  rk_4  вычисляет разгоночные точки для nustroma так как их там 3-4
+   он вычисляет первые три точки
+  */
 void rk_4(double *x, double y_0, double *y_ans, int size) {
     y_ans[0] = y_0;
     double k1, k2, k3, k4;
