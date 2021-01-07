@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/dor/practicum/practikum/func_17.h
+math.h
+-
+
+/home/dor/practicum/practikum/main_17.c
+stdio.h
+-
+odu_17.h
+/home/dor/practicum/practikum/odu_17.h
+func_17.h
+/home/dor/practicum/practikum/func_17.h
+stdlib.h
+-
+
+/home/dor/practicum/practikum/odu_17.h
+

@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/practikum.dir/main_17.c.o CMakeFiles/practikum.dir/odu_17.c.o CMakeFiles/practikum.dir/func_17.c.o  -o practikum 
