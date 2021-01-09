@@ -1,8 +1,7 @@
 #include "func_17.h"
 #include "malloc.h"
 #include "odu_17.h"
-double lb =0;
-double rb = 1;
+
 double y_0 =1;
 double *x;
 /*  rk_4  вычисляет разгоночные точки для nustroma так как их там 3-4
@@ -47,7 +46,7 @@ double nustrom(double *x, double y_0, double *y_ans, int n) {
 
 
 
-double err_calc(double *y1, double *y2, int n){
+double err_calc(double *y1, double *y2, double n){
     double error = 0;
     for(int i=0; i<n; i++){
         error += (y1[i]-y2[2*i]) *(y1[i]-y2[2*i]);
@@ -55,8 +54,10 @@ double err_calc(double *y1, double *y2, int n){
     return error / n;
 }
 
-answer solve(){
+answer solve(double a, double b, double c, double eps){
+# TODO решить вопрос с с и n
     int n = 1;
+
     double *x_n, *x_2n;
     double *y_n, *y_2n;
 
@@ -68,17 +69,17 @@ answer solve(){
 //        free(y_n);
 //        free(y_2n);
 
-        x_n = get_split(lb,rb,n);
-        x_2n = get_split(lb,rb,2*n);
-        y_n = get_split(lb,rb,n);
-        y_2n = get_split(lb,rb,2*n);
+        x_n = get_split(a,b,n);
+        x_2n = get_split(a, b, 2 * n);
+        y_n = get_split(a, b, n);
+        y_2n = get_split(a, b, 2 * n);
 
         nustrom(x_n,y_0,y_n,n);
         nustrom(x_2n,y_0,y_2n,2*n);
 
 
 
-    }while (err_calc(y_n,y_2n,n)>1e-10);
+    }while (err_calc(y_n,y_2n,n)>eps);
 
     free(x_n);
     free(y_n);
