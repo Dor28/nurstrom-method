@@ -5,8 +5,8 @@ typedef struct {
     double *y;
     int n;
 }answer;
-void rk_4(double *x, double y_0, double *y_ans, int size);
-double nustrom(double *x , double  y_0, double *y_ans, int size);
+void rk_4(double *x, double y_0, double *y_ans);
+double nustrom(double *x , double  y_0, double *y_ans, int n);
 answer solve();
-double *get_split(double lb, double rb, int n);
+double *get_split(double a, double b, double c, int n);
 

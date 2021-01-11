@@ -7,7 +7,7 @@ double *x;
 /*  rk_4  вычисляет разгоночные точки для nustroma так как их там 3-4
    он вычисляет первые три точки
   */
-void rk_4(double *x, double y_0, double *y_ans, int size) {
+void rk_4(double *x, double y_0, double *y_ans) {
     y_ans[0] = y_0;
     double k1, k2, k3, k4;
     double h = x[1] - x[0];
@@ -21,19 +21,28 @@ void rk_4(double *x, double y_0, double *y_ans, int size) {
 
 }
 
-double *get_split(double lb, double rb, int n) {
-    double *x = (double *)malloc(n*sizeof(double ));
-    for (int i =0 ; i < n; i++)
-        x[i] = lb + ( (rb - lb)/ (n-1) ) * i ;
+//double *get_split(double lb, double rb, int n) {
+//    double *x = (double *)malloc(n*sizeof(double ));
+//    for (int i =0 ; i < n; i++)
+//        x[i] = lb + ( (rb - lb)/ (n-1) ) * i ;
+//
+//    return  x;
+//}
 
-    return  x;
+double *get_split(double a, double b, double c, int n){
+
+    double *x = (double *)malloc(n*sizeof(double ));
+    for (int i =0; i<n;i++){
+        x[i] = a + n*i;
+    }
+    return x;
 }
 
 
 
 double nustrom(double *x, double y_0, double *y_ans, int n) {
     double h = x[1] - x[0];
-    rk_4(x,y_0,y_ans, n);
+    rk_4(x,y_0,y_ans);
     double f_n, f_n_1, f_n_2;
     for(int i=3; i<n; i++){
         f_n = dy_dx(x[i-1], y_ans[i-1]);
@@ -55,24 +64,24 @@ double err_calc(double *y1, double *y2, double n){
 }
 
 answer solve(double a, double b, double c, double eps){
-# TODO решить вопрос с с и n
-    int n = 1;
-
+// TODO решить вопрос с с и n
+    int n = (int)((b-a)/c)+1;
+    double c_1 = c;
     double *x_n, *x_2n;
     double *y_n, *y_2n;
 
     do {
-        n *= 8;
+
 
 //        free(x_n);
 //        free(x_2n);
 //        free(y_n);
 //        free(y_2n);
 
-        x_n = get_split(a,b,n);
-        x_2n = get_split(a, b, 2 * n);
-        y_n = get_split(a, b, n);
-        y_2n = get_split(a, b, 2 * n);
+        x_n = get_split(a,b,c_1,n);
+        x_2n = get_split(a, b,c_1, 2 * n);
+        y_n = get_split(a, b,c_1, n);
+        y_2n = get_split(a, b,c_1, 2 * n);
 
         nustrom(x_n,y_0,y_n,n);
         nustrom(x_2n,y_0,y_2n,2*n);
